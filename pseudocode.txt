@@ -1,0 +1,40 @@
+//INPUT PI
+variables:
+- number of sensors
+- dropbox directory
+
+
+
+
+
+
+read in data from each of the sensors
+store this into a list
+
+print function to output the array to a .txt file
+save .txt file to dropbox directory
+
+//OUTPUT PI
+LIBRARY
+openpyxl 2.2.0
+https://pypi.python.org/pypi/openpyxl
+
+variables:
+- dropbox directory
+- phone number
+- email
+
+dropbox_text = open('inputpi.txt', 'r')
+print file.read()
+
+be able to read these variables in from a .xlsx and set them in
+
+read in data from the .txt file in the directory
+FORMULAS for calculating
+1) the current temperature based on read-in data
+2) a way to monitor temperature development
+
+send message warning
+toggle a flag where if the issue isn't resolved, you don't send another message
+
+function to read input from user given that there is 
