@@ -1,10 +1,6 @@
-# function that reads a file
-def readfile(filename):
-	f = open(filename, 'r')
-	line = f.read()
-	print line
-
+# ========================================================================
 def main():
+	# The following code applies to reading the .txt file from the dropbox
 	if len(sys.argv) == 2:		# Check the arguments passed to the script
 		filename = sys.argv[1]		# The filename is the first argument
 		if not os.path.isfile(filename):	# Check the File exists
@@ -18,6 +14,14 @@ def main():
 		exit(0)
 	print '[+] Reading from : ' + filename	# Display Message and read the file contents
 	readfile(filename)
-  
+
+# ------------------------------------------------------------------------
+# function that reads a file
+def readfile(filename):
+	f = open(filename, 'r')
+	line = f.read()
+	print line
+	
+# ========================================================================	
 if __name__ == '__main__':
-  main()
+	main()
