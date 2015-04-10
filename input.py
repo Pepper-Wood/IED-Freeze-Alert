@@ -43,20 +43,21 @@ E_DELAY = 0.00005
 
 # ========================================================================
 def main():
-	# Main program block
+	# Variable that maintains optimum temperature level at 25 degrees fahrenheit called temp_constant
+	# Turn on GREEN led and turn off RED led
+	
+	# Initialization of the LCD screen -----------------------------------
+	GPIO.setmode(GPIO.BCM)			# Use BCM GPIO numbers
+	GPIO.setup(LCD_E, GPIO.OUT)		# E
+	GPIO.setup(LCD_RS, GPIO.OUT)	# RS
+	GPIO.setup(LCD_D4, GPIO.OUT)	# DB4
+	GPIO.setup(LCD_D5, GPIO.OUT)	# DB5
+	GPIO.setup(LCD_D6, GPIO.OUT)	# DB6
+	GPIO.setup(LCD_D7, GPIO.OUT)	# DB7
 
-	GPIO.setmode(GPIO.BCM)       # Use BCM GPIO numbers
-	GPIO.setup(LCD_E, GPIO.OUT)  # E
-	GPIO.setup(LCD_RS, GPIO.OUT) # RS
-	GPIO.setup(LCD_D4, GPIO.OUT) # DB4
-	GPIO.setup(LCD_D5, GPIO.OUT) # DB5
-	GPIO.setup(LCD_D6, GPIO.OUT) # DB6
-	GPIO.setup(LCD_D7, GPIO.OUT) # DB7
+	lcd_init()						# Initialise display
 
-	# Initialise display
-	lcd_init()
-
-	# Send some test
+	# Test display code
 	lcd_byte(LCD_LINE_1, LCD_CMD)
 	lcd_string("Rasbperry Pi")
 	lcd_byte(LCD_LINE_2, LCD_CMD)
@@ -64,13 +65,22 @@ def main():
 
 	time.sleep(3) # 3 second delay
 
-	# Send some text
+	# More test display code
 	lcd_byte(LCD_LINE_1, LCD_CMD)
 	lcd_string("Raspberrypi-spy")
 	lcd_byte(LCD_LINE_2, LCD_CMD)
 	lcd_string(".co.uk")
   
 	time.sleep(20)
+	# --------------------------------------------------------------------
+	
+	# Loop the following continuously
+		# Read in values from each of the sensors
+		# Convert each to a corresponding temperature
+		# If the temperature is below temp_constant
+			# Turn on RED led and turn off GREEN led
+		
+		# Write data to 
 
 # ------------------------------------------------------------------------
 def lcd_init():
