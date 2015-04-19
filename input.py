@@ -16,19 +16,23 @@
 # 14: Data Bit 7
 # 15: LCD Backlight +5V**
 # 16: LCD Backlight GND
- 
+
 #import
 import RPi.GPIO as GPIO
 import time
 import os.path
- 
+
 # Define GPIO to LCD mapping
-LCD_RS = 7
-LCD_E  = 8
-LCD_D4 = 25
-LCD_D5 = 24
-LCD_D6 = 23
-LCD_D7 = 18
+LCD_RS = 17		#04
+LCD_E  = 22		#06
+LCD_D4 = 5		#11
+LCD_D5 = 6		#12
+LCD_D6 = 13		#13
+LCD_D7 = 19		#14
+
+#RED and GREEN LEDs
+RED = 21
+GREEN = 16
  
 # Define some device constants
 LCD_WIDTH = 16    # Maximum characters per line
@@ -57,11 +61,16 @@ def main():
 	GPIO.setup(LCD_D6, GPIO.OUT)	# DB6
 	GPIO.setup(LCD_D7, GPIO.OUT)	# DB7
 
+	GPIO.setup(RED, GPIO.OUT)		# Setup GPIO Pin to OUT
+	GPIO.output(RED, True)			# Turn on GPIO
+	GPIO.setup(GREEN, GPIO.OUT)		# Setup GPIO Pin to OUT
+	GPIO.output(GREEN, True)		# Turn on GPIO
+	
 	lcd_init()						# Initialise display
 
 	# Test display code
 	lcd_byte(LCD_LINE_1, LCD_CMD)
-	lcd_string("Rasbperry Pi")
+	lcd_string("Hi Joe")
 	lcd_byte(LCD_LINE_2, LCD_CMD)
 	lcd_string("Model B")
 
@@ -69,7 +78,7 @@ def main():
 
 	# More test display code
 	lcd_byte(LCD_LINE_1, LCD_CMD)
-	lcd_string("Raspberrypi-spy")
+	lcd_string("Hello World")
 	lcd_byte(LCD_LINE_2, LCD_CMD)
 	lcd_string(".co.uk")
   
@@ -95,12 +104,12 @@ def main():
 # ------------------------------------------------------------------------
 def lcd_init():
 	# Initialise display
-	lcd_byte(0x33,LCD_CMD)
-	lcd_byte(0x32,LCD_CMD)
-	lcd_byte(0x28,LCD_CMD)
-	lcd_byte(0x0C,LCD_CMD)
-	lcd_byte(0x06,LCD_CMD)
-	lcd_byte(0x01,LCD_CMD)
+	lcd_byte(0x33,LCD_CMD)	#0011 0011
+	lcd_byte(0x32,LCD_CMD)	#0011 0010
+	lcd_byte(0x28,LCD_CMD)	#0010 1000
+	lcd_byte(0x0C,LCD_CMD)	#0000 1100
+	lcd_byte(0x06,LCD_CMD)	#0000 0110
+	lcd_byte(0x01,LCD_CMD)	#0000 0001
 
 # ------------------------------------------------------------------------
 def lcd_string(message):
