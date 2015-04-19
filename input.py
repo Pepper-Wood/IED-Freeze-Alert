@@ -20,6 +20,7 @@
 #import
 import RPi.GPIO as GPIO
 import time
+import os.path
  
 # Define GPIO to LCD mapping
 LCD_RS = 7
@@ -45,6 +46,7 @@ E_DELAY = 0.00005
 def main():
 	# Variable that maintains optimum temperature level at 25 degrees fahrenheit called temp_constant
 	# Turn on GREEN led and turn off RED led
+	save_path = 'C:/example/' # Location of the dropbox
 	
 	# Initialization of the LCD screen -----------------------------------
 	GPIO.setmode(GPIO.BCM)			# Use BCM GPIO numbers
@@ -74,13 +76,21 @@ def main():
 	time.sleep(20)
 	# --------------------------------------------------------------------
 	
-	# Loop the following continuously
+	while True: # Loop the following continuously
 		# Read in values from each of the sensors
+		# UHHHHHHHHHH
 		# Convert each to a corresponding temperature
+		
 		# If the temperature is below temp_constant
 			# Turn on RED led and turn off GREEN led
 		
-		# Write data to 
+		# Write data to a text file located in the dropbox
+		name_of_file = 'temperatures.txt'
+		completeName = os.path.join(save_path, name_of_file)         
+		file1 = open(completeName, "w")
+		for i in range(0, len(temperature_input)):
+			file1.write(temperature_input[i], '\n')
+		file1.close()
 
 # ------------------------------------------------------------------------
 def lcd_init():
